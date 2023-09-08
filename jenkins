@@ -1,55 +1,56 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Build') {
             steps {
-                // Build your code using a build automation tool (e.g., Maven).
-                // Example: sh 'mvn clean package'
+                echo 'Tool: Maven (for automated builds)'
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                // Run unit and integration tests using test automation tools.
+                echo 'Tool: JUnit (for automated unit tests)'
             }
         }
         stage('Code Analysis') {
             steps {
-                // Integrate a code analysis tool (e.g., SonarQube) to analyze your code.
+                echo 'Tool: SonarQube (for code analysis)'
             }
         }
         stage('Security Scan') {
             steps {
-                // Perform a security scan using a security scanning tool (e.g., OWASP ZAP).
+                echo 'Tool: OWASP ZAP (for security testing)'
             }
         }
         stage('Deploy to Staging') {
             steps {
-                // Deploy your application to a staging server (e.g., AWS EC2).
+                echo 'Tool: AWS Elastic Beanstalk (for deployment to a staging environment)'
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                // Run integration tests on the staging environment.
+                echo 'Tool: Selenium (for automated integration tests on the staging environment)'
             }
         }
         stage('Deploy to Production') {
             steps {
-                // Deploy your application to a production server (e.g., AWS EC2).
+                echo 'Tool: AWS Elastic Beanstalk (for deployment to a production environment)'
             }
         }
     }
 
     post {
         success {
-            // Send email notification on success.
-            emailext subject: 'Pipeline Success',
+            // Send email notification on success with the pipeline log as an attachment.
+            emailext attachLog: true,
+                      subject: 'Pipeline Success',
                       body: 'The Jenkins pipeline completed successfully.',
                       to: 'gssravanthi31@gmail.com'
         }
         failure {
-            // Send email notification on failure.
-            emailext subject: 'Pipeline Failure',
+            // Send email notification on failure with the pipeline log as an attachment.
+            emailext attachLog: true,
+                      subject: 'Pipeline Failure',
                       body: 'The Jenkins pipeline failed. Please check the logs.',
                       to: 'gssravanthi31@gmail.com'
         }
