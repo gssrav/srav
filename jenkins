@@ -1,0 +1,63 @@
+pepipeline{
+    agent any
+
+    stages {
+        stage("Build") {
+            steps {
+               echo "building ..."
+            }
+        }
+
+        stage("Unit and Integration Tests") {
+            steps {
+                echo "Unit and Integration Tests ..."
+            }
+        }
+
+        stage("Code Analysis") {
+            steps {
+                echo "Code Analysis ..."
+            }
+        }
+
+        stage("Security Scan") {
+            steps {
+                 echo "Security Scan ..."
+            }
+        }
+
+        stage("Deploy to Staging") {
+            steps {
+              echo "Deploy to Staging ..."
+            }
+        }
+
+        stage("Integration Tests on Staging") {
+            steps {
+                echo "Integration Tests on Staging ..."
+            }
+        }
+
+        stage("Deploy to Production") {
+            steps {
+               echo "Deploy to Production ..."
+            }
+        }
+    }
+post {
+        failure {
+            mail :"gssravanthi31@gmail.com"
+            subject: "failure"
+            body:"The pipeline has failed"
+        }
+        success {
+            mail :"gssravanthi31@gmail.com"
+            subject: "success"
+            body:"The pipeline has completed successfully."
+                      
+        }
+
+    }
+}
+
+
