@@ -11,16 +11,7 @@ pipeline {
             steps {
                 echo 'Tool: JUnit (for automated unit tests)'
             }
- post {
-        success {
-            
-            emailext attachLog: true,
-                      subject: 'Pipeline Success',
-                      body: 'build completed successfully.',
-                      to: 'gssravanthi31@gmail.com'
-        }
-        
-    }
+
         }
         stage('Code Analysis') {
             steps {
@@ -31,16 +22,7 @@ pipeline {
             steps {
                 echo 'Tool: OWASP ZAP (for security testing)'
             }
- post {
-        success {
-            
-            emailext attachLog: true,
-                      subject: 'Pipeline Success',
-                      body: 'build completed successfully.',
-                      to: 'gssravanthi31@gmail.com'
-        }
-        
-    }
+
         }
         stage('Deploy to Staging') {
             steps {
@@ -56,6 +38,16 @@ pipeline {
             steps {
                 echo 'Tool: AWS Elastic Beanstalk (for deployment to a production environment)'
             }
+ post {
+        success {
+            
+            emailext attachLog: true,
+                      subject: 'Pipeline Success',
+                      body: 'build completed successfully.',
+                      to: 'gssravanthi31@gmail.com'
+        }
+        
+    }
         }
     }
 
