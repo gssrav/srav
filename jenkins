@@ -11,6 +11,15 @@ pipeline {
             steps {
                 echo 'Tool: JUnit (for automated unit tests)'
             }
+ post {
+        success {
+            
+           
+                      subject: 'Pipeline Success',
+                      body: 'build completed successfully.',
+                      to: 'srujanagudey@gmail.com'
+        }
+ 
         }
         stage('Code Analysis') {
             steps {
@@ -21,6 +30,14 @@ pipeline {
             steps {
                 echo 'Tool: OWASP ZAP (for security testing)'
             }
+ post {
+        success {
+            
+           
+                      subject: 'Pipeline Success',
+                      body: 'build completed successfully.',
+                      to: 'srujanagudey@gmail.com'
+        }
         }
         stage('Deploy to Staging') {
             steps {
@@ -38,17 +55,9 @@ pipeline {
             }
         }
     }
-
-    post {
-        success {
-            
-            emailext attachLog: true,
-                      subject: 'Pipeline Success',
-                      body: 'build completed successfully.',
-                      to: 'srujanagudey@gmail.com'
-        }
- 
-        }
+}
+   
+    
         
-    }
+    
 
