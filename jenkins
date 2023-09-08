@@ -41,10 +41,10 @@ pipeline {
 
     post {
         success {
-            // Send email notification on success.
+            
             emailext attachLog: true,
                       subject: 'Pipeline Success',
-                      body: 'The Jenkins pipeline completed successfully.',
+                      body: 'build completed successfully.',
                       to: 'gssravanthi31@gmail.com'
         }
         
