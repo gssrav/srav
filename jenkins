@@ -1,73 +1,62 @@
 pipeline {
     agent any
-    environment {
-        DIRECTORY_PATH = "C:\\Users\\sharv\\OneDrive\\Desktop\\Jenkinsfile"
-        TESTING_ENVIRONMENT = "testing-environment"
-        PRODUCTION_ENVIRONMENT = "sharvani-production"
-    }
+
     stages {
         stage('Build') {
             steps {
-                echo "Build the code using a build automation tool to compile and package your code. Tool: Maven"
-
+                echo 'Tool: Maven (for automated builds)'
             }
         }
-
         stage('Unit and Integration Tests') {
             steps {
-                echo "Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected. Tools: JUnit (Unit Tests), Selenium (Integration Tests)"
-
+                echo 'Tool: JUnit (for automated unit tests)'
             }
-            post{
-                success{
-                    mail to: "sharvanikandala@gmail.com",
-                    subject: "Tests status email",
-                    body: "Tests were successful",
-		  
-
-
-                
-            }
+ post {
+        success {
+            
+            emailext attachLog: true,
+                      subject: 'Pipeline Success',
+                      body: 'build completed successfully.',
+                      to: 'gssravanthi31@gmail.com'
         }
-
+        
+    }
+        }
         stage('Code Analysis') {
             steps {
-                echo "Integrate a code analysis tool to analyse the code and ensure it meets industry standards. Tool: SonarQube "
+                echo 'Tool: SonarQube (for code analysis)'
             }
         }
-
         stage('Security Scan') {
             steps {
-                echo "Perform a security scan on the code using a tool to identify any vulnerabilities. Tool: OWASP ZAP "
+                echo 'Tool: OWASP ZAP (for security testing)'
             }
-	    post{
-                success{
-                    mail to: "sharvanikandala@gmail.com",
-                    subject: "Security scan status email",
-                    body: "Security scans were successful",
-		    
-
-
-                }
-            }
+ post {
+        success {
+            
+            emailext attachLog: true,
+                      subject: 'Pipeline Success',
+                      body: 'build completed successfully.',
+                      to: 'gssravanthi31@gmail.com'
         }
-
+        
+    }
+        }
         stage('Deploy to Staging') {
             steps {
-                echo "Deploy the application to a staging server (e.g., AWS EC2 instance)."
-
+                echo 'Tool: AWS Elastic Beanstalk (for deployment to a staging environment)'
             }
         }
-
         stage('Integration Tests on Staging') {
             steps {
-                echo "Run integration tests on the staging environment to ensure the application functions as expected in a production-like environment."
+                echo 'Tool: Selenium (for automated integration tests on the staging environment)'
             }
         }
-	stage('Deploy to Production') {
+        stage('Deploy to Production') {
             steps {
-                echo "Deploy the application to a production server (e.g., AWS EC2 instance)."
+                echo 'Tool: AWS Elastic Beanstalk (for deployment to a production environment)'
             }
         }
     }
+
 }
