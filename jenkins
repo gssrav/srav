@@ -1,63 +1,57 @@
-pepipeline{
+pipeline {
     agent any
-
+    
     stages {
-        stage("Build") {
+        stage('Build') {
             steps {
-               echo "building ..."
+                // Build your code using a build automation tool (e.g., Maven).
+                // Example: sh 'mvn clean package'
             }
         }
-
-        stage("Unit and Integration Tests") {
+        stage('Unit and Integration Tests') {
             steps {
-                echo "Unit and Integration Tests ..."
+                // Run unit and integration tests using test automation tools.
             }
         }
-
-        stage("Code Analysis") {
+        stage('Code Analysis') {
             steps {
-                echo "Code Analysis ..."
+                // Integrate a code analysis tool (e.g., SonarQube) to analyze your code.
             }
         }
-
-        stage("Security Scan") {
+        stage('Security Scan') {
             steps {
-                 echo "Security Scan ..."
+                // Perform a security scan using a security scanning tool (e.g., OWASP ZAP).
             }
         }
-
-        stage("Deploy to Staging") {
+        stage('Deploy to Staging') {
             steps {
-              echo "Deploy to Staging ..."
+                // Deploy your application to a staging server (e.g., AWS EC2).
             }
         }
-
-        stage("Integration Tests on Staging") {
+        stage('Integration Tests on Staging') {
             steps {
-                echo "Integration Tests on Staging ..."
+                // Run integration tests on the staging environment.
             }
         }
-
-        stage("Deploy to Production") {
+        stage('Deploy to Production') {
             steps {
-               echo "Deploy to Production ..."
+                // Deploy your application to a production server (e.g., AWS EC2).
             }
         }
     }
-post {
-        failure {
-            mail :"gssravanthi31@gmail.com"
-            subject: "failure"
-            body:"The pipeline has failed"
-        }
-        success {
-            mail :"gssravanthi31@gmail.com"
-            subject: "success"
-            body:"The pipeline has completed successfully."
-                      
-        }
 
+    post {
+        success {
+            // Send email notification on success.
+            emailext subject: 'Pipeline Success',
+                      body: 'The Jenkins pipeline completed successfully.',
+                      to: 'gssravanthi31@gmail.com'
+        }
+        failure {
+            // Send email notification on failure.
+            emailext subject: 'Pipeline Failure',
+                      body: 'The Jenkins pipeline failed. Please check the logs.',
+                      to: 'gssravanthi31@gmail.com'
+        }
     }
 }
-
-
