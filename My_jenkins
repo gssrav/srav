@@ -58,7 +58,7 @@ pipeline {
             emailext(
                 subject: 'Pipeline Successful',
                 body: 'Your pipeline has succeeded.',
-                to: 'gssravanthi31.com'
+                to: 'gssravanthi31@gmail.com'
             )
         }
         failure {
@@ -66,7 +66,7 @@ pipeline {
             emailext(
                 subject: 'Pipeline Failed',
                 body: 'Your pipeline has failed. Please check the logs.',
-                to: 'gssravanthi31.com'
+                to: 'gssravanthi31@gmail.com'
             )
         }
     }
