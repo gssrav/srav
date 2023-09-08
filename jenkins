@@ -45,7 +45,14 @@ pipeline {
             emailext attachLog: true,
                       subject: 'Pipeline Success',
                       body: 'build completed successfully.',
-                      to: 'gssravanthi31@gmail.com'
+                      to: 'srujanagudey@gmail.com'
+        }
+ failure {
+          
+            emailext attachLog: true,
+                      subject: 'Pipeline Failure',
+                      body: 'The Jenkins pipeline failed. Please check the logs.',
+                      to: 'srujanagudey@gmail.com'
         }
         
     }
