@@ -13,6 +13,12 @@ pipeline {
                 echo "Run unit tests. Tools: JUnit (Unit Tests), Selenium (Integration Tests)"
             }
             post{
+failure {
+        emailext to: "recipient@example.com",
+        subject: "Pipeline Failed",
+        body: "Pipeline failed. Please investigate.",
+        attachLog: true
+    }
         always{
             emailext to: "gssravanthi31@gmail.com",
             subject: "Test Email",
@@ -33,6 +39,12 @@ pipeline {
                 echo "Perform a security scan. Tool: OWASP ZAP "
             }
 	    post{
+failure {
+        emailext to: "recipient@example.com",
+        subject: "Pipeline Failed",
+        body: "Pipeline failed. Please investigate.",
+        attachLog: true
+    }
                always{
             emailext to: "gssravanthi31@gmail.com",
             subject: "Security scan Email",
