@@ -58,6 +58,14 @@ pipeline {
             steps {
                 echo "Deploy the application to a production server (e.g., AWS EC2 instance)."
             }
+ post{
+               always{
+            emailext to: "gssravanthi31@gmail.com",
+            subject: "Security scan Email",
+            body: "Security Scan successful",
+            attachLog: true
+        }
+    }
         }
     }
 }
